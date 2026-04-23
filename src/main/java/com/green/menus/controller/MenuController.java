@@ -1,4 +1,4 @@
-package com.green.menus;
+package com.green.menus.controller;
 
 import java.util.List;
 
@@ -18,10 +18,12 @@ public class MenuController {
 	
 	// 메뉴 목록 조회  http://localhost:9090/Menus/List
 	@RequestMapping("/Menus/List")   
-	public   String   list(  ) {
-		// 조회한결과를 ArrayList 로 돌려준디
-		List<MenuDTO> menuList = menuMapper.getMenuList();
+	public   String   list( Model model ) {
+		// 조회한결과를 ArrayList 로 돌려준다
+		List<MenuDTO> menuList = menuMapper.getMenuList(); // Arraylist로 결과를 받는다
 		System.out.println(menuList);
+		
+		model.addAttribute("menuList",menuList);
 		
 		return "menus/list";
 	}
