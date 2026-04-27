@@ -62,12 +62,14 @@ public class MenuController {
 		
 		return "redirect:/Menus/List";
 	}
+
 	
 	// http://localhost:8080/Menus/Delete?menu_id=MENU01
 	// delete방법2 
 	@RequestMapping("/Menus/Delete")
 	public String	delete (MenuDTO menuDTO) {
-		System.out.println("삭제대상 : " + menuDTO);
+		System.out.println("삭제대상 : " + menuDTO); 
+		// menu_id만 넘겨 받아도 MenuDTO로 받을 수 있음, menu_id, null, 0으로 MenuDTO에 전달됨
 
 		// db에서 delete
 		menuMapper.deleteMenu(menuDTO); // mybatis mapper에는 DTO를 전달한다 
@@ -106,6 +108,22 @@ public class MenuController {
 		return "redirect:/Menus/List";
 	}
 	
+	
+	// /Menus/WriteForm2 - 메뉴이름으로만 추가하기
+	@RequestMapping("/Menus/WriteForm2")
+	public String	WriteForm2 () {
+		
+		return "menus/write2" ;
+	}
+	
+	// /Menus/Write2?menu_name=C#
+	@RequestMapping("/Menus/Write2")
+	public String write2 (MenuDTO menuDTO) {
+		
+		menuMapper.insertMenu2(menuDTO);
+		
+		return "redirect:/Menus/List";
+	}
 }
 
 
