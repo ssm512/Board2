@@ -2,16 +2,24 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
+<!-- Windows -> preferences -> xml 검색 -> XML(wild web developer) -> download external resources ... check 표시 -->
 <!-- namespace="com.green.menus.mapper.MenuMapper" : interface 위치 -->
 <mapper namespace="com.green.menus.mapper.MenuMapper">
 	
 	<select id="getMenuList"
 	        resultType="com.green.menus.dto.MenuDTO">
 			
-	SELECT     MENU_ID, MENu_NAME, MENU_SEQ
+	SELECT     MENU_ID, MENU_NAME, MENU_SEQ
 	 FROM      MENUS
 	 ORDER BY  MENU_SEQ ASC
 	 	
 	</select>
   
+  <insert id="insertMenu">
+  INSERT INTO MENUS VALUES (#{menu_id}, #{menu_name}, #{menu_seq}) 
+  </insert>
+  
+  <delete id="deleteMenu">
+  DELETE FROM MENUS WHERE menu_id = #{menu_id}
+  </delete>
 </mapper>
