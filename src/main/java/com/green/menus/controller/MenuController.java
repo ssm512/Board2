@@ -81,8 +81,8 @@ public class MenuController {
 	 * System.out.println("삭제할 menu id : " + menu_id);
 	 * 
 	 * MenuDTO menuDTO = new MenuDTO (menu_id, null, 0); // db에서 delete
-	 * menuMapper.deleteMenu(menuDTO); // mybatis mapper에는 DTO를 전달한다 return
-	 * "redirect:/Menus/List"; }
+	 * menuMapper.deleteMenu(menuDTO); // mybatis mapper에는 DTO를 전달한다 
+	 * return "redirect:/Menus/List"; }
 	 */
 	
 	// http://localhost:8080/Menus/UpdateForm?menu_id=MENU09
@@ -92,9 +92,20 @@ public class MenuController {
 		// 수정할 자료를 db에서 검색 : 수정할 정보가 담긴 조회된 menu
 		MenuDTO menu = menuMapper.getMenu(menuDTO);
 		model.addAttribute("menu", menu);
-		
+		System.out.println("조회한 menuDTO : " + menu);
+			
 		return "/menus/update";
 	}
+	
+	// http://localhost:8080/Menus/Update?menu_id=MENU09&menu_name=Kotlin&menu_seq=9
+	@RequestMapping("/Menus/Update")
+	public String Update (MenuDTO menuDTO) {
+		// 넘어온 정보로 db를 수정한다
+		menuMapper.updateMenu(menuDTO);
+		
+		return "redirect:/Menus/List";
+	}
+	
 }
 
 
